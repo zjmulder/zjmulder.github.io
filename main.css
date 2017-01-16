@@ -8,17 +8,12 @@ html {
 
 body {
     background: #FFF;
-    /*box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);*/
     color: #545454;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     min-height:100%;
     height:100%;
-    width:100%;
-    margin:auto;
-    margin-left:10px;
-    margin-right:10px;
     box-sizing: border-box;
 
 }
@@ -614,6 +609,7 @@ span.skills-title span.h1-small {
     margin:0px;
     margin-left:15px;
     margin-right:15px;
+        -webkit-text-size-adjust: 100%;
 }
 
 .skills-breakdown>div {
@@ -713,12 +709,14 @@ div.clear {
 }
 
 div.footer-wrapper {
-    height:200px;
+    height:250px;
     position:relative;
     clear:both;
     width:100%;
     margin:auto;
-    padding:25px;
+    padding-top:25px;
+    padding-bottom:25px;
+    box-sizing:border-box;
     background:#30343F;
 }
 
