@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Zachary Mulder | Outside </title>
+        <meta name="description" content="Learning about me">
+        <link rel="stylesheet" href="/main.min.css">
+        <link rel="stylesheet" href="/assests/plugins/codemirror/codemirror.min.css">
+    </head>
+    
+    <body>
+                
+        <div class='content-wrapper'>
+            <div class="header-wrapper">
+                <div class="menu-wrapper">
+                    <div class="menu-name">
+                        Zachary Mulder
+                    </div>
+                    <div class="menu-links">
+                        <a href="/index.html">
+                            <div class="menu-item">About Me</div>
+                        </a>
+                        <a href="/pages/projects.html">
+                            <div class="menu-item active">Projects</div>
+                        </a>
+                        <a href="/pages/photography.html">
+                            <div class="menu-item">Photography</div>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class='content'>
+                <div class='info-block no-border'>
+                    <div class='info-block-header'>
+                        <div class="info-block-header-inner">
+                            <div class="header all"> <span class="small"> Filter activities on top or zoom in and hover on a route for more info below.</span></div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                    <div class="map-detail">
+                        <div id="detail-icon-1" class="map-icon-cell active">
+                            <div class="map-detail-num">
+                                <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|33658A">
+                            </div>
+                            <div class="map-detail-name">
+                                Biking
+                            </div>
+                        </div>
+                        <div id="detail-icon-2" class="map-icon-cell active">
+                            <div class="map-detail-num">
+                                <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|DD5658">
+                            </div>
+                            <div class="map-detail-name">
+                                Hiking
+                            </div>
+                        </div>
+                        <div id="detail-icon-3" class="map-icon-cell active">
+                            <div class="map-detail-num">
+                                <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|49306B">
+                            </div>
+                            <div class="map-detail-name">
+                                Running
+                            </div>
+                        </div>
+                        <div id="detail-icon-4" class="map-icon-cell active">
+                            <div class="map-detail-num">
+                                <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|499F68">
+                            </div>
+                            <div class="map-detail-name">
+                                Golfing
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div id="map">
+                    </div>
+                    <div class='map-detail bottom'>
+                        <div class="map-detail-cell">
+                            <div id="detail-distance" class="map-detail-num">
+                                715.8
+                            </div>
+                            <div class="map-detail-name">
+                                Distance <span class="small">(Miles)</span>
+                            </div>
+                        </div>
+                        <div class="map-detail-cell">
+                            <div id="detail-time" class="map-detail-num">
+                                83.22
+                            </div>
+                            <div class="map-detail-name">
+                                Time <span class="small">(Hours)</span>
+                            </div>
+                        </div>
+                        <div class="map-detail-cell">
+                            <div id="detail-avgSpeed" class="map-detail-num">
+                                8.6
+                            </div>
+                            <div class="map-detail-name">
+                                Average Speed <span class="small">(MPH)</span>
+                            </div>
+                        </div>
+                        <div class="map-detail-cell">
+                            <div id="detail-maxSpeed" class="map-detail-num">
+                                41.79
+                            </div>
+                            <div class="map-detail-name">
+                                Max Speed <span class="small">(MPH)</span>
+                            </div>
+                        </div>
+                        <div class="map-detail-cell">
+                            <div id="detail-avgHeartRate" class="map-detail-num">
+                                133.04
+                            </div>
+                            <div class="map-detail-name">
+                                Average Heart Rate <span class="small">(BPM)</span>
+                            </div>
+                        </div>
+                        <div class="map-detail-cell">
+                            <div id="detail-maxHeartRate" class="map-detail-num">
+                                208
+                            </div>
+                            <div class="map-detail-name">
+                                Max Heart Rate <span class="small">(BPM)</span>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+                <div class='info-block'>
+                    <div class='info-block-header'>
+                        <div class="info-block-header-inner">
+                            <div class="header all">Outside Adventures</div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                <p>I grew up outside. I lived in a house full of Ironman triatheletes who considered a day that didn't have <b>at least</b> one bike ride, run, hike, swim, or tent in it to be a waste. While I may not be quite as extreme, I've come to appreciate being outside as a necessity in my life.</p>
+                
+                <p>But enough talk aboust feelings, you're here for the data.</p>
+                
+                <p>A few months ago, I purchased a <a href="https://buy.garmin.com/en-US/US/p/529988">Garmin Forerunner 235</a> and have since been using it to track everything I do outside whether that's running, biking, hiking, or even one time, golfing. The watch tracks my GPS location as well as heart rate and information about my movement every second. I wanted to take this data and be able to see it all at once, and I thought the best place to start would be to plot it on a map (duh) and put it on my website.
+                    
+                <h2>Step 1: Extracting the Data</h2>
+                
+                <p>Garmin allows exporting of indivdual activities in one of two XML formats: <a href="http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">tcx</a> or <a href="http://www.topografix.com/GPX/1/1/">gpx</a>. The former is their custom XML format including almost every measurable data point recorded each second whereas the later is a standard format that contains only information with GPS coordinates and elevation. I chose to use the first format for the sake of retaining as much data as possible. <a href="/assests/downloads/Sample.tcx" download="Sample.tcx">Here's a sample tcx file</a> from the 76 mile <a href="http://www.perimeterbicycling.com/el-tour-de-tucson/results/">El Tour De Tucson</a> race I did in early Novemeber.
+                </p>
+                
+                <p>
+                    The XML follows a fairly simple structure where the activity contains a series of 'lap' elements with children elements summarizing the lap as well as a series of children 'trackpoint' elements which capture the second by second information recorded by the watch. Thus, the Java code to read the XML file was equally straightforward. 
+                </p>
+                
+                <div class="code">
+                    <textarea>//Get the root element and it's lap children\Element activity = (Element) doc.getElementsByTagName("Activity").item(0);\NodeList laps = activity.getElementsByTagName("Lap");\\//Loop through each lap\for(int i = 0; i &lt; laps.getLength(); i++){\   Element lap = (Element) laps.item(i);\\   //Pull summary statistics in children elements\\   //Get the trackpoints\   NodeList tracks = lap.getElementsByTagName("Trackpoint");\\   //Loop through each trackpoint\   for(int j = 0; j &lt; tracks.getLength(); j++){\      Element track = (Element) tracks.item(j);\\      //Save second by second information\\   }\}</textarea>
+                </div>
+                <p>I stored all of the data in a very simple SQLite database using <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a> with a schema that mirrors the exact same structure I've told you about twice now.</p>
+                <p style="text-align:center;">
+                    <img src="/assests/images/DBOutdoor.png" style="width:800px;">
+                </p>
+                
+                <p>From there, all that was left on the data front was exporting the data into a format that I could use on the web. I found an easy to use package for creating JSON files called <a href="https://code.google.com/archive/p/json-simple/">json-simple</a> that handled everything I needed. At this point I made a simplification and only exported the GPS coordinates for every five seconds of activity simply to reduce the file size (50 tracked activities was approximately 10MB if every data point was used).
+                
+                </p>
+                
+                <h2>Step 2: Adding the Data to Google Maps</h2>
+                
+                <p>
+                    Google Maps has an absolutely fantastic <a href="https://developers.google.com/maps/documentation/javascript/">javascript API</a>. The part that I was dreading the most turned out to be the easiest step in this project. After requesting a key, I had a simple map up and running in no time. <a href="https://mapstyle.withgoogle.com/">I created a custom style for the map</a>, figured out how to draw generic lines (which didn't have any problem handling thousands of points), and added markers for the start and end of an activity.
+                    
+                    From there, I was able to add event listeners to make the map as interactive as my heart desired. Hovering over an activity will update the details section of the bottom of the map while accenting the activity route. The markers at the top of the map filter out activities based on their type while recalculating the aggregates at the bottom of the map. 
+                
+                </p>
+                <h2>Step 3 - 929012: Make it even more Interesting</h2>
+                    
+                    <p>Since steps 1 and 2 were so straightforward (seriously it took only a few days), there's a whole world of possibilities out there for what's next. </p>
+                    
+                    <p>One of the most glaring omissions from the Garmin website is a way to compare activities side by side. This would be especially useful for examining how you improve over time on the same routes. A side by side analysis where you could track your distance, speed, and heart rate live on a map through animation or gradient paths could quantify months of hard work through a visual and meaningful representation.
+                    
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+        <div class='footer-wrapper'>
+            <div class="info-block">
+                <div class="info-column w-25">
+                    <div class="info-inner text-left">
+                        <h4>Contact Me</h4>
+                        <p>I live life on the edge. No social media (LinkedIn doesn't count).</p>
+                        <div class="contact-email">
+                            Email: <a href="mailto:zjmulder@gmail.com?Subject=You%20Seem%20Pretty%20Swell"><b class="accent">zjmulder@gmail.com</b></a>
+                        </div>
+                        <div>
+                            <a href="https://www.linkedin.com/in/zachary-mulder-40585368">Find me on LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column w-25">
+                    <div class="info-inner text-left">
+                        <h4>Things I love for outdoors</h4>
+                        <ul>
+                            <li>Scarlett, my Cannondale CAAD 8</li>
+                            <li>Long johns - The best kept secret from Arizonans</lI>
+                            <li>Everything HydroFlask</li>
+                            <li>Langly Alpha Pro Camera Bag</li>
+                            <li>Garmin Forerunner 235</li>
+                            <li>Rhodia Webnotebooks</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-column w-25">
+                    <div class="info-inner text-left">
+                        <h4>Reasons I stay inside</h4>
+                        <ul>
+                            <li>Oswin, my custom built gaming/coding desktop</li>
+                            <li>Counter Strike: Global Offensive</li>
+                            <li>Rocket League</li>
+                            <li>Overwatch</li>
+                            <li><a href="https://www.twitch.tv/timthetatman">twitch.tv/TimTheTatman</a></li>
+                            <li>Too many books to list</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-column w-25">
+                    <div class="info-inner text-left">
+                        <h4>Website Design and Icons</h4>
+                        <div class="icon-attribution"><p>This website was designed and created by myself from the ground up.</p></div>
+                        <div class="icon-attribution">Analytics icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                        </div>
+                        <div class="icon-attribution">Icons also provided by <a href="http://devicon.fr/">Devicon 2.0</a></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <script src='/assests/plugins/jquery/jquery-3.1.0.min.js' type='text/javascript'></script>
+        <script src="/assests/plugins/codemirror/codemirror.min.js"></script>
+        <script src="/assests/plugins/codemirror/modes/clike/clike.min.js"></script>
+        <script src="/assests/scripts/map.min.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTDUoWSpNJR1Vt3ZAqA5F3Nz0E0NEeY74&callback=initMap"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.code>textarea').each(function() {
+                    $(this).text($(this).text().trim());
+                    CodeMirror.fromTextArea(this, {
+                        lineNumbers:true,
+                        mode:"text/x-java",
+                        readOnly:true,
+                        lineSeparator:"\\"
+                   }); 
+                });
+            });
+        </script>
+    
+    </footer>
+    
+    
+</html>
