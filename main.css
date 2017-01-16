@@ -87,7 +87,7 @@ img {
     margin:0px auto;
     margin-top:12px;
     height:100%;
-    font-weight:100;
+    font-weight:200;
     font-size:24px;
 }
 
@@ -457,7 +457,7 @@ svg line.separator {
 }
 
 svg text.separator {
-    font-weight:100;
+    font-weight:200;
     stroke:none;
     fill:#AAA;
 }
@@ -635,7 +635,8 @@ a {
 }
 
 #map {
-        height: 50vh;
+    height: 50vh;
+    margin:auto;
   }
 
 div.map-detail {
@@ -724,14 +725,14 @@ div.footer-wrapper {
 
 .footer-wrapper .info-block .info-column .info-inner h4{
     color:#FFF;
-    font-weight:100;
+    font-weight:200;
     line-height:1.5;
     margin-top:0px;
 }
 
 .footer-wrapper .info-block .info-column .info-inner ul, .footer-wrapper .info-block .info-column .info-inner p{
     color:#888;
-    font-weight:100;
+    font-weight:200;
     font-size:12px;
     list-style-type: none;
     padding:0px;
@@ -741,7 +742,7 @@ div.footer-wrapper {
 
 .footer-wrapper .info-block .info-column .info-inner .icon-attribution {
     color:#888;
-    font-weight:100;
+    font-weight:200;
     font-size:12px;
     margin-bottom:10px;
 }
