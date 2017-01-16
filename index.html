@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Zachary Mulder</title>
         <meta name="description" content="About Me">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/main.min.css">
     </head>
     
@@ -458,6 +459,13 @@
                    $(this).css("height",h); 
                 });
                 
+                /**var h = 
+                    $('.skills-details').height();
+                
+                $('.skills-details').css("height",h);
+                
+                $('.skills-container.first').removeClass('first');
+                */
                 drawSVG();
                 
                 $(window).bind('resizeEnd', function() {
