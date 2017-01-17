@@ -1187,13 +1187,16 @@ var drawSVG = function() {
 
 
                             ePath.transition(myT)
-                                .attr("stroke-dashoffset", ePathLength)
+                                .attr("stroke-dashoffset", ePathLength);
+                            
+                            eLeg.transition(myT2)
+                                .duration(legTime)
+                                .attr("stroke-dashoffset", eLegLength);
 
                             eBox.transition(myT2)
+                                .delay(legTime)
+                                .duration(tLength-legTime)
                                 .attr("stroke-dashoffset", eBoxLength);
-
-                            eLeg.transition(myT2)
-                                .attr("stroke-dashoffset", eLegLength);
 
                         }
                         if(!eraseOnly) {expClick(e, true, myT, myT2);}
