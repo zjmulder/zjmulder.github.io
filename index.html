@@ -468,7 +468,9 @@
                 drawSVG();
                 
                 $(window).bind('resizeEnd', function() {
+                    
                     drawSVG();
+                    $('.exp-click').first().click();
                 });
                 
                 $('.exp-click').first().click();
