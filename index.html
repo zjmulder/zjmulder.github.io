@@ -458,19 +458,19 @@
                    $(this).css("height",h); 
                 });
                 
-                /**var h = 
-                    $('.skills-details').height();
+                var width = $(window).width();
                 
-                $('.skills-details').css("height",h);
+                lastClick=null;
                 
-                $('.skills-container.first').removeClass('first');
-                */
                 drawSVG();
                 
                 $(window).bind('resizeEnd', function() {
-                    
-                    drawSVG();
-                    $('.exp-click').first().click();
+                    if($(window).width()!=width) {
+                        drawSVG();
+                        
+                        $("[detail*=" + $(lastClick).attr("detail") + "]").click()
+                        width = $(window).width();
+                    }
                 });
                 
                 $('.exp-click').first().click();

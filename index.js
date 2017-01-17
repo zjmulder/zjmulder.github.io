@@ -3,7 +3,7 @@ var drawSVG = function() {
                 var skillsToSelect=[];
                 var detailToSelect=0;
 
-                var lastClick=null;
+                
                 var isActivated=false;
 
                 var fontSizeLabel=14,
@@ -1095,6 +1095,13 @@ var drawSVG = function() {
                         if(this==lastClick){
                             return;
                         }
+                        
+                        var transitionLength = tLength;
+                        
+                        if(!isActivated) {
+                            transitionLength = 0;
+                        }
+                        
                         isActivated=true;
                         eraseOnly = eraseOnly || false;
                         tran = tran || false;
@@ -1132,11 +1139,11 @@ var drawSVG = function() {
                         }
 
                         var t = d3.transition()
-                            .duration(tLength)
+                            .duration(transitionLength)
                             .ease(d3.easeLinear);
 
                         var t2 = t.transition()
-                            .duration(tLength)
+                            .duration(transitionLength)
                             .ease(d3.easeLinear)
                             .on("end", selectSkills);
 
