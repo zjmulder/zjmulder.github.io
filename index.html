@@ -454,7 +454,12 @@
                     headerH = $('.skills-details .info-block-header').height(),
                     detailH = $('#detail-deloitte').height();
                 
-                $('.skills-details .info-block.skills').css("height", totalH-detailH-headerH-2*25);
+                var skillsH = totalH-detailH-headerH-2*25;
+                
+                skillsH = Math.max(300, skillsH);
+                skillsH = Math.min(400, skillsH);
+                
+                $('.skills-details .info-block.skills').css("height", skillsH);
                 
                 $('.skills-details').css("max-height", detailH + headerH + 2*25  + 400+2);
                 
