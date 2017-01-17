@@ -252,6 +252,7 @@ div.info-block-header div.header.all {
 
 .header.center .exp-header {
     width:100%;
+    display:block;
 }
 
 div.header-border {
@@ -338,9 +339,10 @@ div.info-block.no-border.no-margin {
 }
 
 div.info-block.skills {
-    height:400px;
     margin-top:0;
-    margin-bottom:47px;
+    max-height:400px;
+    min-height:300px;
+    
 }
 
 .info-block .info-column:not(.text-left) {
@@ -479,6 +481,7 @@ svg text.separator {
     max-width:1200px;
     margin:auto;
     border-top:2px solid #DDD;
+    height:100vh;
     
 }
 
@@ -503,7 +506,6 @@ svg text.separator {
     .skills-details .info-column {
         width:100%;
         margin:auto;
-        margin-top:25px;
     }
     
     .info-block.intro {

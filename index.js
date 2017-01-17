@@ -878,6 +878,10 @@ var drawSVG = function() {
                         
                         if(!isActivated){
                             transitionLength=0;
+                        } else if(!eraseOnly){
+                            $('body').animate({
+                                scrollTop:$('.skills-details').offset().top
+                            },tLength);
                         }
                         if(this == lastClick) {
                             return;
@@ -1100,6 +1104,10 @@ var drawSVG = function() {
                         
                         if(!isActivated) {
                             transitionLength = 0;
+                        } else if(!eraseOnly) {
+                            $('body').animate({
+                                scrollTop:$('.skills-details').offset().top
+                            },tLength);
                         }
                         
                         isActivated=true;

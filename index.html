@@ -449,7 +449,16 @@
             
             $(document).ready(function(){
                 var h=
-                $('.skills-container.active .skills-info').height();
+                $('.skills-container.active .skills-info').height(),
+                    totalH = $('.skills-details').height(),
+                    headerH = $('.skills-details .info-block-header').height(),
+                    detailH = $('#detail-deloitte').height();
+                
+                $('.skills-details .info-block.skills').css("height", totalH-detailH-headerH-2*25);
+                
+                $('.skills-details').css("max-height", detailH + headerH + 2*25  + 400+2);
+                
+                $('.skills-details').css("min-height", detailH + headerH + 2*25  + 300+2);
                 
                 $('.skills-container.first').removeClass('first');
                 
