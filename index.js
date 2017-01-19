@@ -308,7 +308,7 @@ var drawSVG = function() {
                             ]
                         },
                         {
-                            text:"AutoLab",
+                            text:"AUTOLab",
                             x:exp.width/2,
                             y:seps[2].y1 + seps[0].y1 + (seps[2].y1-seps[0].y1)/2,
                             skills:[

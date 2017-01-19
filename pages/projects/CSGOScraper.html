@@ -40,18 +40,18 @@
                     I love Counter Strike. I fell in love with the game in December of 2013 when I was peer pressured into trying Global Offensive during winter break at one of my favorite man caves back home. Coming from years of playing Call of Duty, I couldn’t hit an enemy to save my life (“What do you mean I can’t move and shoot?”) but after logging almost 1000 hours in game, achieving the highest competitive rank possible (yes it was when the ranks were bugged, but who keeps track of that), I can say that I’m at least not terrible.
                 </p>
                 <p>
-                    Alongside my love of the playing the game, I also fell in love with watching the game at a professional level. And more importantly, my inner data scientist was alive with excitement. A professional competition where the game took place entirely on a server meant you had perfect knowledge about every action in the game. It’s data heaven.
+                    Alongside my love of playing the game, I also fell in love with watching the game at a professional level. And more importantly, my inner data scientist was alive with excitement. A professional competition where the game takes place entirely on a server means you have perfect knowledge of every action in the game. It’s data heaven.
                 </p>
                 <p>
-                    Turns out, extracting the data from the server into meaningful numbers was harder than I thought.
-                    <a href='/assests/downloads/CSGOServer.pdf' download='CSGO Live Predictions.pdf'>I gave it an attempt in Grad School.</a>
+                    Turns out, extracting the logs from the server into meaningful data was harder than I thought.
+                    <a href='/assests/downloads/CSGOServer.pdf' download='CSGO Live Predictions.pdf'>I gave it an attempt in grad school.</a>
                 </p>
                 <p>
-                    So I went back to the drawing board and thought what I really want is to capture every game, even if it’s only at a high level. Enter HLTV. THE place to go for information on anything counter strike related (I swear this isn't a plug). Almost every professional match played is catalogued and analyzed on their website. I thought I had hit the jackpot.
+                    So I went back to the drawing board and thought what I really want is to capture every game, even if it’s only at a high level. Enter HLTV. The place to go for information on anything Counter Strike related (I swear this isn't a plug). Almost every professional match played is catalogued and analyzed on their website. I thought I had hit the jackpot.
                 </p>
                 
                 <p>
-                    But, HLTV doesn’t provide an API or any easy way to export their vast information. I had just started to undertake web development at work, and so I thought I might be able to cobble together a scraper.
+                    But, HLTV doesn’t provide an API or any easy way to export their vast information. I had just started to undertake web development while working at Deloitte, and I thought I might be able to cobble together a scraper.
                 </p>
                 
                 <!--Step 1-->
@@ -60,41 +60,47 @@
                     <img src="/assests/images/StatPage.png" style="width:800px;"/>
                 </p>
                 <p>
-                    This page is exactly what I was looking for. After every game played, a page is created with essentially 3 different sections: Information about the match and how the team performed as a whole, the result of each round played, and stats for each player in the match. The following code, using the java library <a href="https://jsoup.org/">jsoup</a>, returns the center section of the page pictured above under the variable body.
+                    This is exactly what I was looking for. After every game, a page is created with essentially three different sections: Information about the match and how the team performed as a whole, the result of each round played, and stats for each player in the match. The following code, using the java library <a href="https://jsoup.org/">jsoup</a>, returns the center section of the page pictured above under the variable body.
                 </p>
                 <div class="code">
                     <textarea>//Return the page\Document doc = Jsoup.connect(url).userAgent(userAgent).get();\\//Set the center body of the page\Element body = doc.getElementsByClass("centerNoHeadline").select("div.centerFade").first();
                     </textarea>
                 </div>
                 <p>
-                    From there, the rest of the page was fairly straightforward to scrape. Many of the selectors seemed oddly specific, but it appears much of the page formatting was accomplished using inline styles as opposed to CSS and defined classes. 
+                    From there, the rest of the page was fairly straightforward to scrape. Many of the selectors seemed oddly specific, but it appears the page formatting was mostly accomplished using inline styles as opposed to CSS and defined classes. 
                 </p>
                 <div class="code">
                     <textarea>//Returns all 'Maps' in the series from the top of the page\//Used to group individual games into the overall series (best of 3, best of 5, etc...)\Elements maps = body.select("div[style*=z-index: 1] a[href]");\\//Each row in the overall game stats\Element overview = body.select("div[style*=float:left]").first();\Elements overviewRows = overview.select("div.covGroupBoxContent > div:not([style*=clear:both])");\\//Each icon in 'Round History' with the round outcome\Elements roundResults = body.select("div[style*=margin-top:5px] div[style*=width:49%] img");\\//Each row in the 'Raw stats' section at the bottom of the page\Element statBox = body.select(" > div[style*=clear:both]").last();\Elements statRows = statBox.select("div.covMainBoxContent div[style*=width:606px;height:22px] > div");
                     </textarea>
                 </div>
                 <p>
-                    Great, so now that I had a scraper, I just had to figure out how to access the page for each match. I looked at the URL:
+                    Great, after flushing out the details to capture the data within each section of the page, I had a scraper. I just had to figure out how to access the page for each match. I looked at the URL:
                 </p>
                 <code>
                     http://www.hltv.org/?pageid=188&amp;matchid=35822
                 </code>
                 <p>
-                    And I figured I could enumerate all values for MatchID at the end of the query string. Unfortunately, MatchID seemed to skip values for 'real' matches and would return inconsistent results when specifying a value that didn't exist in their database. So how do I know which MatchIDs correspond to real matches?
+                    And figured I could enumerate all values for MatchID at the end of the query string. Turns out, it's not that easy. MatchID seemed to skip values for 'real' matches and would return inconsistent results when specifying a value that didn't exist in their database. So how do I know which MatchIDs correspond to real matches?
                 </p>
                 
                 <!--Step 0-->
                 <h2>Step 0: Find the Golden MatchIDs</h2>
                 <p>
-                    I took a step back and realized all I had to do was scrape another page, <a href="http://www.hltv.org/?pageid=188">the recent matches statistics page</a>. 
+                    I took a step back and realized there was a separate place that contained a list of all matches with their golden MatchIDs, <a href="http://www.hltv.org/?pageid=188">the recent matches</a>. 
                 </p>
                 <p>
-                    Each row on the page corresponded to one match and its accompanying MatchID as well as other information about the match contained in the statistics page. Scraping this page turned out to be a blessing in disguise. First, now I could easily filter out games to scrape by date (since who needs games back in 2012). Second, I could distinguish if a match was played online, at a LAN event, or during a major. Last, this was an easy way to continue updating my database as new matches were played. I only had to check this list (which is in chronological order), and stop scraping matches that were already in the database (I chose to define that stopping criteria as when an entire page, or 50 matches, were already scrapped).
+                    This page contains a list of completed matches with some additional high-level information and a link to the detailed statistics page. Since I had already figured out the quirks of using jsoup, and this page had such a simple structure, it was pretty straightforward to create a second scraper.
+                    
                 </p>
+                
                 <div class="code">
                     <textarea>//Return the page\Document doc = Jsoup.connect(url).userAgent(userAgent).get();\\//Get the table and all rows\Element table = doc.getElementsByClass("covMainBoxContent").first();\Elements rows = table.select("a");\\//Loop through each row\for (Element link : rows){\  ...\}
                     </textarea>
                 </div>
+                
+                <p>
+                    This annoying backtrack turned out to be a blessing in disguise as I worked through the details of executing and maintaining the project. First, I could easily filter out older matches using built in functionality on the recent matches page (who needs games from back in 2012). Second, I could distinguish if a match was played online, at a LAN event, or during a major, which often has a significant impact on a team's performance. Last, as this list is in chronological order, I could easily check and see if their were new matches available to analyze as I periodically updated my database.
+                </p>
                 
                 <!--Step 2-->
                 <h2>Step 2: Storing the Data</h2>
@@ -102,15 +108,15 @@
                     <img src="/assests/images/DB.PNG" style="width:800px;"/>
                 </p>
                 <p>
-                    Next, I created a fairly straight forward database schema and implemented it in SQLite using <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>. Wholly unremarkable, but there were a few things I managed during scraping that made analysis easier in the future.
+                    Next, I created a fairly straight forward database schema and implemented it in SQLite using <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>. Mostly unremarkable, but there were a few things I managed during this data capture phase that made analysis easier in the future.
                 </p>
                 <p>
-                    <b>Players, Rosters, and Teams</b> - If you follow professional Counter Strike, you know that who is playing for who changes all the time. Players get DDOSed and a team needs a stand-in, teams get bought out and change sponsors, and players are replaced before they can even get comfortable if they don't perform. To capture these changes, I grouped 5 players into a roster indicating their first match played together by StartDate, and their last game played together as EndDate (or NULL if each player's last game was with the current roster, indicating it's currently active). I used the same mechanism for team (or sponsor) to easily tell which roster was currently active with each team. This way, if a team needs to use a different player (and subsequently a different roster), it's tracked separately as opposed to being lumped in with all of their results. I did this by tracking the individual players listed as active for each game.
+                    <b>Players, Rosters, and Teams</b> - If you follow professional Counter Strike, you know that teams modify and swap their rosters all the time. Players get DDOSed and a team needs a stand-in, lineups are bought leading to a change in name, and if a player's performance is subpar, they are replaced before they can even get comfortable. To capture how dynamic these interactions are, I grouped 5 players into a roster indicating their first match played together by StartDate, and their last game played together as EndDate (or NULL if each player's last game played is with the current roster, indicating the roster is active). I used the same mechanism for team (or sponsor) to easily tell which roster was currently active with each team. This way, if a team needs to use a different player (and subsequently a different roster), the match statistics are tracked separately as opposed to being lumped in with all of their results. 
                 </p>
                 
                 <h2>Step 3: The Model</h2>
                 <p>
-                    Next, I moved to R to create the Elo based model for ranking the teams. I pulled every match played by each active roster and gave the roster a baseline rating of 1300. To determine a team's score in a given game, I took the number of rounds they won over the total number of rounds played. This conveniently rewarded a blowout win with a higher score while a close game (or tie) would result in a score close to 0.5. From there, I divided the matches into a training set containing 80% of the data, and a test set of 20% to find the optimal multiplier for updating a team's ranking after a match based on minimizing the error in the predicted versus actual score of a match. Using the optimal multiplier, I began cataloguing the predicted outcome against actual outcomes and found that my model has about a 66% change of predicting the correct outcome. While this is a promising result (if I were a betting man, I could probably make a fair profit), I hope to include the model's predictive ability by including more inputs such as the map choice, match venue (online matches versus major tournamnets), and fractional rosters to yield even better results.
+                    Next, I moved to R to create the Elo based model for ranking the teams. I pulled every match played by each active roster and gave the roster a baseline rating of 1300. To determine a team's score in a given game, I took the number of rounds they won over the total number of rounds played. This purposefully rewarded a blowout win with a higher score while a close game (or tie) would result in a score close to 0.5. From there, I divided the matches into a training set containing 80% of the data, and a test set with 20% of the data to find the optimal multiplier for updating a team's ranking after a match based on minimizing the error in the predicted score. Using the optimal multiplier, I began cataloguing the predicted outcome against actual outcomes and found that my model accurately predicted the winner of a match 66% of the time. While this is a promising result (if I were a betting man, I could probably make a fair profit), I hope to improve the model's predictive ability by including more inputs such as the map choice, individual performance, match venue (online matches versus major tournamnets), and fractional rosters to yield even more accurate results.
                 </p>
 
             </div>

@@ -139,15 +139,15 @@
                             <div style="clear:both;"></div>
                         </div>
                     </div>
-                <p>I grew up outside. I lived in a house full of Ironman triatheletes who considered a day that didn't have <b>at least</b> one bike ride, run, hike, swim, or tent in it to be a waste. While I may not be quite as extreme, I've come to appreciate being outside as a necessity in my life.</p>
+                <p>I grew up outside. I lived in a house full of Ironman triathletes who considered a day that didn't have <b>at least</b> one bike ride, run, hike, swim, or tent in it to be a waste. While I may not be quite as extreme, I've come to appreciate being outside as a necessity in my life.</p>
                 
-                <p>But enough talk aboust feelings, you're here for the data.</p>
+                <p>But enough talk about feelings, you're here for the data.</p>
                 
-                <p>A few months ago, I purchased a <a href="https://buy.garmin.com/en-US/US/p/529988">Garmin Forerunner 235</a> and have since been using it to track everything I do outside whether that's running, biking, hiking, or even one time, golfing. The watch tracks my GPS location as well as heart rate and information about my movement every second. I wanted to take this data and be able to see it all at once, and I thought the best place to start would be to plot it on a map (duh) and put it on my website.
+                <p>A few months ago, I purchased a <a href="https://buy.garmin.com/en-US/US/p/529988">Garmin Forerunner 235</a> and have since been using it to track everything I do outside whether that's running, biking, hiking, or even one time, golfing. The watch tracks my GPS location as well as heart rate and information about my movement every second. I wanted to take this data and be able to see it all at once, and I thought the best place to start would be to plot it on a map (duh).
                     
                 <h2>Step 1: Extracting the Data</h2>
                 
-                <p>Garmin allows exporting of indivdual activities in one of two XML formats: <a href="http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">tcx</a> or <a href="http://www.topografix.com/GPX/1/1/">gpx</a>. The former is their custom XML format including almost every measurable data point recorded each second whereas the later is a standard format that contains only information with GPS coordinates and elevation. I chose to use the first format for the sake of retaining as much data as possible. <a href="/assests/downloads/Sample.tcx" download="Sample.tcx">Here's a sample tcx file</a> from the 76 mile <a href="http://www.perimeterbicycling.com/el-tour-de-tucson/results/">El Tour De Tucson</a> race I did in early Novemeber.
+                <p>Garmin allows exporting of individual activities in one of two XML formats: <a href="http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">tcx</a> or <a href="http://www.topografix.com/GPX/1/1/">gpx</a>. The former is their custom XML format including almost every measurable data point recorded each second whereas the later is a standard format that contains only information with GPS coordinates and elevation. I chose to use the first format for the sake of retaining as much data as possible. <a href="/assests/downloads/Sample.tcx" download="Sample.tcx">Here's a sample tcx file</a> from the 76 mile <a href="http://www.perimeterbicycling.com/el-tour-de-tucson/results/">El Tour De Tucson</a> race I did in early November.
                 </p>
                 
                 <p>
@@ -162,14 +162,14 @@
                     <img src="/assests/images/DBOutdoor.PNG" style="width:800px;">
                 </p>
                 
-                <p>From there, all that was left on the data front was exporting the data into a format that I could use on the web. I found an easy to use package for creating JSON files called <a href="https://code.google.com/archive/p/json-simple/">json-simple</a> that handled everything I needed. At this point I made a simplification and only exported the GPS coordinates for every five seconds of activity simply to reduce the file size (50 tracked activities was approximately 10MB if every data point was used).
+                <p>From there, all that was left on the data front was exporting the data into a format that I could use on the web. I found an easy to use package for creating JSON files called <a href="https://code.google.com/archive/p/json-simple/">json-simple</a> that handled everything I needed. At this point I made a simplification and only exported the GPS coordinates for every five seconds of activity simply to reduce the file size and download time (50 tracked activities was approximately 10MB if every data point was used).
                 
                 </p>
                 
                 <h2>Step 2: Adding the Data to Google Maps</h2>
                 
                 <p>
-                    Google Maps has an absolutely fantastic <a href="https://developers.google.com/maps/documentation/javascript/">javascript API</a>. The part that I was dreading the most turned out to be the easiest step in this project. After requesting a key, I had a simple map up and running in no time. <a href="https://mapstyle.withgoogle.com/">I created a custom style for the map</a>, figured out how to draw generic lines (which didn't have any problem handling thousands of points), and added markers for the start and end of an activity.
+                    Google Maps has an absolutely fantastic <a href="https://developers.google.com/maps/documentation/javascript/">javascript API</a>. What I thought would be the hardest part of the project turned out to be surprisingly straight forward. After requesting a key, I had a simple map up and running in no time. <a href="https://mapstyle.withgoogle.com/">I created a custom style for the map</a>, figured out how to draw generic lines (which didn't have any problem handling thousands of points), and added markers for the start and end of an activity.
                     
                     From there, I was able to add event listeners to make the map as interactive as my heart desired. Hovering over an activity will update the details section of the bottom of the map while accenting the activity route. The markers at the top of the map filter out activities based on their type while recalculating the aggregates at the bottom of the map. 
                 
@@ -181,6 +181,8 @@
                     <p>One of the most glaring omissions from the Garmin website is a way to compare activities side by side. This would be especially useful for examining how you improve over time on the same routes. A side by side analysis where you could track your distance, speed, and heart rate live on a map through animation or gradient paths could quantify months of hard work through a visual and meaningful representation.
                     
                     </p>
+                    
+                    <p>This is one of many paths that I'm considering taking this project down next.</p>
                 </div>
             </div>
         </div>
